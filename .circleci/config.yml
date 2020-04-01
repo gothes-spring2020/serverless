@@ -1,43 +1,33 @@
-# Python CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-python/ for more details
-#
 version: 2
 jobs:
   build:
-     branches:
-       only:
-         - master
-         - a10
+    branches:
+      only:
+        - master
+        - a10
     docker:
       - image: circleci/python:3.6.1
 
-    working_directory: ~/repo
+    working_directory: ~/serverless
 
     steps:
       - checkout
-
-
       - run:
           name: install dependencies
           command: |
             python3 -m venv venv
             . venv/bin/activate
-
       - run:
           name: install awscli
           command: sudo pip install awscli
-
       - run:
           name: Zip Artifact
           command: |
             zip index.zip index.js
-
       - run:
           name: Upload LambdaFunction to S3
           command: |
             aws s3 cp index.zip s3://${S3_BUCKET_ADDR}/index.zip
-
       - run:
           name: Update lambdaFunction code
           command: |
