@@ -4,7 +4,7 @@ jobs:
     branches:
       only:
         - master
-        - a10
+        # - a10
     docker:
       - image: circleci/python:3.6.1
 
@@ -32,8 +32,5 @@ jobs:
           name: Update lambdaFunction code
           command: |
             aws lambda update-function-code --function-name EmailService --region us-east-1 --zip-file fileb://index.zip
-
-
-
-            
+           
             
