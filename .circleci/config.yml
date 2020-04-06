@@ -1,8 +1,8 @@
 version: 2
 jobs:
   build:
-    branches:
-      only:
+    #branches:
+      #only:
         #- master
         #- a11
     docker:
